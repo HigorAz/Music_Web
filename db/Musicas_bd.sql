@@ -1,3 +1,5 @@
+PRAGMA encoding = "UTF-8";
+
 CREATE TABLE IF NOT EXISTS artistas (
   id integer PRIMARY KEY autoincrement,
   nome varchar(45) NOT NULL,

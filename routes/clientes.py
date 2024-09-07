@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import render_template, request, jsonify
 from . import bp
 from db.database import get_db
 
@@ -17,7 +17,7 @@ def get_clientes():
         cursor = db.cursor()
         cursor.execute('SELECT * FROM clientes')
         dados = cursor.fetchall()
-        return jsonify([dict(row) for row in dados])
+        return render_template("clientes.html", dados = dados)
     except sqlite3.Error as e:
         return jsonify({'error': str(e)}), 500
     finally:

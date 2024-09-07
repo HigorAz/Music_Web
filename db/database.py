@@ -17,8 +17,8 @@ def close_db(e=None):
 
 def init_db():
     db = get_db()
-    with current_app.open_resource('db/Musicas_bd.sql', mode='r') as f:
-        db.cursor().executescript(f.read())
+    with current_app.open_resource('db/Musicas_bd.sql', mode='rb') as f:
+        db.cursor().executescript(f.read().decode('utf-8'))
     db.commit()
 
 def init_app(app):

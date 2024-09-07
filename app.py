@@ -2,7 +2,7 @@ from flask import Flask
 from db.database import init_app, init_db
 from routes import bp as routes_bp
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder= "templates")
 
 # Inicializar o banco de dados
 init_app(app)
