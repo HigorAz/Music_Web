@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="text-center">{% block title %} Gravadoras {% endblock %}</h1>
+
+    <div class="container">
+        <div class="row">
+            {% for dado in dados %}
+            <div class="col-md-3 mb-4">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-header">Gravadora</div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ dado.nome }}</h4>
+                        <p class="card-text">Valor: R$ {{ dado.valor_contrato }},00</p>
+                        <p class="card-text">Vencimento: {{ dado.vencimento_contrato }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

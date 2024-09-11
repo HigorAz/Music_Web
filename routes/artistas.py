@@ -1,4 +1,5 @@
-from flask import request, jsonify
+import sqlite3
+from flask import render_template, request, jsonify
 from . import bp
 from db.database import get_db
 
@@ -17,7 +18,7 @@ def get_artistas():
         cursor = db.cursor()
         cursor.execute('SELECT * FROM artistas')
         dados = cursor.fetchall()
-        return jsonify([dict(row) for row in dados])
+        return render_template("artistas.html", dados = dados)
     except sqlite3.Error as e:
         return jsonify({'error': str(e)}), 500
     finally:
@@ -58,11 +59,12 @@ def handle_artista (artista_id):
 def get_artista(artista_id):
     try:
         db = get_db()
+        db.row_factory = sqlite3.Row
         cursor = db.cursor()
         cursor.execute('SELECT * FROM artistas WHERE id = ?', (artista_id,))
         id = cursor.fetchone()
         if id: 
-            return jsonify(dict(id))
+            return render_template("artista.html", id = id)
         else:
             return jsonify({'error': 'ID não encontrado'})
     except sqlite3.Error as e:
